@@ -147,7 +147,7 @@ You must replace <code>secretkey</code> with your personal API key.
 <h1 id="token-words">Token Words</h1>
 
 <h2 id="get-token-words">Get Token Words</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/mal"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
@@ -156,11 +156,11 @@ You must replace <code>secretkey</code> with your personal API key.
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"tokenwords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some text"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word1"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some text"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -169,15 +169,79 @@ You must replace <code>secretkey</code> with your personal API key.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://api.mt2414.in/v1/tokenwords/sourcelang</code></p>
+<p><code class="prettyprint">GET https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;</code></p>
 
 <h1 id="translations">Translations</h1>
 
 <h2 id="create-new-translation">Create new translation</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/translations"</span>
+  -X POST
+  -H <span class="s2">"Authorization: secretkey"</span>
+  -d <span class="s1">'{
+  "tokenwords" : [
+    {
+      "msgid": "word1",
+      "msgstr": "translation1"
+    },
+    {
+      "msgid": "word2",
+      "msgstr": "translation2"
+    }]
+}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.mt2414.in/v1/translations</code></p>
 
 <h1 id="corrections">Corrections</h1>
 
+<h2 id="update-corrections">Update corrections</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/corrections"</span>
+  -X POST
+  -H <span class="s2">"Authorization: secretkey"</span>
+  -d <span class="s1">'{
+    "book.chapter.verse" : "New verse text",
+    "book.chapter.verse" : "New verse text",
+    "book.chapter.verse" : "New verse text",
+}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.mt2414.in/v1/corrections</code></p>
+
 <h1 id="suggestions">Suggestions</h1>
+
+<h2 id="get-suggestions">Get suggestions</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;"</span>
+  -H <span class="s2">"Authorization: secretkey"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;</code></p>
 
           <h1 id="errors">Errors</h1>
 
