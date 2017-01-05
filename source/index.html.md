@@ -45,7 +45,7 @@ You must replace <code>secretkey</code> with your personal API key.
 ## Get Token Words
 
 ```shell
-curl "https://api.mt2414.in/v1/tokenwords/mal"
+curl "https://api.mt2414.in/v1/tokenwords/<source-lang>"
   -H "Authorization: secretkey"
 ```
 
@@ -55,11 +55,11 @@ curl "https://api.mt2414.in/v1/tokenwords/mal"
 {
   "tokenwords" : [
     {
-      "msgid": "Some text",
+      "msgid": "word1",
       "msgstr": ""
     },
     {
-      "msgid": "Some text",
+      "msgid": "word2",
       "msgstr": ""
     }]
 }
@@ -69,13 +69,88 @@ This endpoint retrieves all token words.
 
 ### HTTP Request
 
-`GET https://api.mt2414.in/v1/tokenwords/sourcelang`
+`GET https://api.mt2414.in/v1/tokenwords/<source-lang>`
 
 # Translations
 
 ## Create new translation
 
+```shell
+curl "https://api.mt2414.in/v1/translations"
+  -X POST
+  -H "Authorization: secretkey"
+  -d '{
+  "tokenwords" : [
+    {
+      "msgid": "word1",
+      "msgstr": "translation1"
+    },
+    {
+      "msgid": "word2",
+      "msgstr": "translation2"
+    }]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"GEN": "USFM text for Genesis",
+"EXO": "USFM text for Exodus"
+}
+```
+
+### HTTP Request
+
+`POST https://api.mt2414.in/v1/translations`
 
 # Corrections
 
+## Update corrections
+
+```shell
+curl "https://api.mt2414.in/v1/corrections"
+  -X POST
+  -H "Authorization: secretkey"
+  -d '{
+    "book.chapter.verse" : "New verse text",
+    "book.chapter.verse" : "New verse text",
+    "book.chapter.verse" : "New verse text",
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"GEN": "USFM text for Genesis",
+"EXO": "USFM text for Exodus"
+}
+```
+
+### HTTP Request
+
+`POST https://api.mt2414.in/v1/corrections`
+
 # Suggestions
+
+## Get suggestions
+
+```shell
+curl "https://api.mt2414.in/v1/suggestions/<book-name>"
+  -H "Authorization: secretkey"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+"GEN": "USFM text for Genesis",
+"EXO": "USFM text for Exodus"
+}
+```
+
+### HTTP Request
+
+`GET https://api.mt2414.in/v1/suggestions/<book-name>`
