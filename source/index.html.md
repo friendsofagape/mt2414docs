@@ -23,7 +23,7 @@ The documentation on how to use the AutographaMT client application is provided 
 # New user registration
 Currently anyone with a valid email address can register and access the resources on the AutographaMT server.
 
-> To register, use this code:
+> To register a new user account:
 
 ```shell
 # If you have curl installed, you can directly access the APIs listed here. Alternativeley, you can use the Postman plugin (Firefox and Chrome).
@@ -49,7 +49,7 @@ curl "https://api.autographamt.bridgeconn.com/v1/auth>"
   -d "password=<password>"
 
 > This will return the `secretkey` to access the API server.
-
+```
 AutographaMT uses API keys to allow access to the API. You can register a new MT2414 API key at our [site](https://augtographamt.bridgeconn.com).
 
 AutographaMT expects for the API key to be included in all API requests to the server in a header that looks like the following:
