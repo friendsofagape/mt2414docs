@@ -50,7 +50,7 @@ curl "https://api.autographamt.bridgeconn.com/v1/auth>"
 
 > This will return the `secretkey` to access the API server.
 ```
-AutographaMT uses API keys to allow access to the API. You can register a new MT2414 API key at our [site](https://augtographamt.bridgeconn.com).
+AutographaMT uses API keys to allow access to the APIs. You can register a new AutographaMT API key at our [site](https://augtographamt.bridgeconn.com).
 
 AutographaMT expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -59,6 +59,46 @@ AutographaMT expects for the API key to be included in all API requests to the s
 <aside class="notice">
 You must replace <code>secretkey</code> with your personal API key.
 </aside>
+
+# Recovering passwords
+
+Recovering of the forgotten passwords is done in two stages.
+
+## Request temporary password
+
+User requests to reset the password by providing the email id to reset the password along with a link to the /forgotpassword endpoint.
+
+If the email Id submitted is on the server and is verified the system will generate a temporary password and sends it to the user's email id.
+
+It will also return `{"success":true, "message":"Link to reset password has been sent to the registered mail ID"}`
+    
+If no such email registered on the server, 
+
+it will return `{"success":false, "message":"Email has not yet been registered"}`
+
+> To send the request for a temporary password
+
+```shell
+curl 
+  -X POST
+  # TODO
+``` 
+## Reset the password
+User can then submit a new password, along with the temporary password sent by the system.
+
+If the temporary password matches the password sent by the server, the hash + salt of the new password is stored as the new password. The server will return a message `{"success":true, "message":"Password has been reset. Login with the new password."}`
+
+
+If the temporary password doesn't match with the server's temporary password, it will return an error message `{"success":false, "message":"Invalid temporary password."}`
+
+> To send the request for a temporary password
+
+```shell
+curl 
+  -X POST
+  # TODO
+``` 
+
 
 # Token Words
 
