@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: AutographaMT API Reference
 
 language_tabs:
   - shell
@@ -16,23 +16,43 @@ search: true
 
 # Introduction
 
-Welcome to the MT2414 API! You can use our API to access MT2414 API endpoints to accelerate Bible translations.
+Welcome to the AutographaMT API Documentation! You can use our API to access AutographaMT API endpoints to accelerate Bible translations. The AutographaMT APIs are accessed through a AutographaMT client.
+
+The documentation on how to use the AutographaMT client application is provided on [it's website](https://autographamt.bridgeconn.com). 
+
+# New user registration
+Currently anyone with a valid email address can register and access the resources on the AutographaMT server.
+
+> To register, use this code:
+
+```shell
+# If you have curl installed, you can directly access the APIs listed here. Alternativeley, you can use the Postman plugin (Firefox and Chrome).
+
+curl -X POST 
+  -d "email=<email_id>" 
+  -d "password=<password>" 
+  https://api.autographamt.bridgeconn.com/v1/registration
+
+> Server will send a verification email to the email_id provided by the user, if the given email_id is not used for registering any other user accounts.
+
+> It will also return a message `{"success":true, "message":"Verification Email Sent"}` if it accepts the credentials provided by the user. If the email_id is already used for registering a user account, it will return a message, `{"success":false, "message":"Email Already Exists"}`
+```
 
 # Authentication
 
 > To authorize, use this code:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: secretkey"
-```
+curl "https://api.autographamt.bridgeconn.com/v1/auth>"
+  -X POST 
+  -d "email=<email_id>" 
+  -d "password=<password>"
 
-> Make sure to replace `secretkey` with your API key.
+> This will return the `secretkey` to access the API server.
 
-MT2414 uses API keys to allow access to the API. You can register a new MT2414 API key at our [site](https://mt2414.in).
+AutographaMT uses API keys to allow access to the API. You can register a new MT2414 API key at our [site](https://augtographamt.bridgeconn.com).
 
-MT2414 expects for the API key to be included in all API requests to the server in a header that looks like the following:
+AutographaMT expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: secretkey`
 
