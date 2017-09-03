@@ -1,1 +1,0 @@
-[Slate Setup](SlateSetup.md)
