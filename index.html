@@ -396,6 +396,15 @@ You must replace <code>secretkey</code> with your personal API key. JSON Web Tok
   -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span>
   -d <span class="s1">'{"language":"&lt;language&gt;", "&lt;version&gt;":"&lt;version&gt;"}'</span> 
   <span class="s2">"https://api.mt2414.in/v1/createsources"</span>
+
+<span class="gp">&gt; </span>You can call the /v1/sourceid to get the id of a <span class="nb">source </span>language
+
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s1">'{"language":"&lt;language&gt;", "&lt;version&gt;":"&lt;version&gt;"}'</span> 
+  <span class="s2">"https://api.mt2414.in/v1/sourceid"</span>
+
 </code></pre><h2 id='2-upload-source-text'>2 Upload Source Text</h2>
 <p>Once a language and version is assigned to be used as a source, user can upload the source text for that language. You can call the /sources api to upload the content.</p>
 <pre class="highlight shell tab-shell"><code>curl 
