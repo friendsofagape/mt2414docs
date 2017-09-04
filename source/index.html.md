@@ -37,7 +37,15 @@ curl -X POST
 
 > It will also return a message `{"success":true, "message":"Verification Email Sent"}` if it accepts the credentials provided by the user. If the email_id is already used for registering a user account, it will return a message, `{"success":false, "message":"Email Already Exists"}`
 ```
+## Verification
+When the user clicks on the verification link sent to the email id, the verification request is submitted to the /verification endpoint.
 
+```shell
+curl "https://api.autographamt.bridgeconn.com/v1/verification/<verification_code>"
+  -X GET
+
+> After the succesfful verification, the user will be directed to the homepage of the client app.
+```
 # Authentication
 
 > To authorize, use this code:
@@ -50,14 +58,12 @@ curl "https://api.autographamt.bridgeconn.com/v1/auth>"
 
 > This will return the `secretkey` to access the API server.
 ```
-AutographaMT uses API keys to allow access to the APIs. You can register a new AutographaMT API key at our [site](https://augtographamt.bridgeconn.com).
+AutographaMT uses API keys to allow access to the APIs. You can register a new AutographaMT API key at our [site](https://augtographamt.bridgeconn.com). To authorize a user on the API side, we use JWT tokens. These have to be added to all requests using the following header.
 
-AutographaMT expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: secretkey`
+`Authorization: Bearer <jwt>`
 
 <aside class="notice">
-You must replace <code>secretkey</code> with your personal API key.
+You must replace <code>secretkey</code> with your personal API key. JSON Web Tokens (JWT) are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 </aside>
 
 # Recovering passwords
@@ -79,9 +85,11 @@ it will return `{"success":false, "message":"Email has not yet been registered"}
 > To send the request for a temporary password
 
 ```shell
-curl 
-  -X POST
-  # TODO
+curl "https://api.autographamt.bridgeconn.com/v1/resetpassword"
+  -X POST 
+  -d "email=<email>" 
+
+> Server will send a temporary password with the link to the /forgotpasword
 ``` 
 ## Reset the password
 User can then submit a new password, along with the temporary password sent by the system.
@@ -94,11 +102,44 @@ If the temporary password doesn't match with the server's temporary password, it
 > To send the request for a temporary password
 
 ```shell
-curl 
-  -X POST
-  # TODO
+curl "https://api.autographamt.bridgeconn.com/v1/forgotpassword"
+  -X POST 
+  -d "temp_password=<temp_password>" 
+  -d "password=<new_password>"
 ``` 
+# Keys
+The /v1/keys will permit a client application to interact with the system without having to call the /auth all the time. 
 
+### TODO
+
+# Create Source Text
+To create a new source language and upload text in the source langugage to the server.
+
+## 1 Creatie Source Language
+An administrator can select the name of the language and supply the version name to create a source langauge.
+
+```shell
+curl
+  -X
+  -H "Authorization:bearer <access token>"
+  -d '{"language":"<language>", "<version>":"<version>"}' 
+  "https://api.mt2414.in/v1/createsources"
+```
+## 2 Upload Source Text
+Once a language and version is assigned to be used as a source, user can upload the source text for that language. You can call the /sources api to upload the content.
+
+```shell
+curl 
+  -X POST 
+  -H "Authorization:bearer <access token>" 
+  -d "source_id=<source_id>" 
+  -f "content=<content>" 
+  https://api.mt2414.in/v1/sources
+
+```
+<aside class="notice">
+The content submitted must be in valid usfm format. At a minimum the file should contain \id followed by a valid 3 letter Book id. Each book must be a separate file.
+</aside>
 
 # Token Words
 
