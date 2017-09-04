@@ -1,89 +1,199 @@
+
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>AutographaMT API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #f8f8f2;
-  background-color: #272822;
+.highlight .gh {
+  color: #999999;
 }
-.highlight .err {
-  color: #272822;
-  background-color: #f92672;
+.highlight .sr {
+  color: #f6aa11;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
   color: #75715e;
 }
 .highlight .cp {
-  color: #f4bf75;
+  color: #75715e;
 }
-.highlight .nt {
-  color: #f4bf75;
+.highlight .c1 {
+  color: #75715e;
 }
-.highlight .o, .highlight .ow {
-  color: #f8f8f2;
+.highlight .cs {
+  color: #75715e;
 }
-.highlight .p, .highlight .pi {
-  color: #f8f8f2;
+.highlight .c, .highlight .cd {
+  color: #75715e;
 }
-.highlight .gi {
-  color: #a6e22e;
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
 }
 .highlight .gd {
-  color: #f92672;
+  color: #49483e;
 }
-.highlight .gh {
-  color: #66d9ef;
-  background-color: #272822;
-  font-weight: bold;
+.highlight .gi {
+  color: #49483e;
 }
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #ae81ff;
+.highlight .ge {
+  color: #49483e;
 }
 .highlight .kc {
-  color: #fd971f;
-}
-.highlight .kt {
-  color: #fd971f;
-}
-.highlight .kd {
-  color: #fd971f;
-}
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #a6e22e;
-}
-.highlight .sr {
-  color: #a1efe4;
-}
-.highlight .si {
-  color: #cc6633;
-}
-.highlight .se {
-  color: #cc6633;
-}
-.highlight .nn {
-  color: #f4bf75;
-}
-.highlight .nc {
-  color: #f4bf75;
-}
-.highlight .no {
-  color: #f4bf75;
-}
-.highlight .na {
   color: #66d9ef;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #a6e22e;
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
 }
 .highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
   color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -98,8 +208,8 @@
         <img src="images/navbar.png" alt="Navbar" />
       </span>
     </a>
-    <div class="tocify-wrapper">
-      <img src="images/logo.png" alt="Logo" />
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
         </div>
@@ -107,7 +217,86 @@
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
-      <div id="toc">
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#new-user-registration" class="toc-h1 toc-link" data-title="New user registration">New user registration</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#verification" class="toc-h2 toc-link" data-title="New user registration">Verification</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#recovering-passwords" class="toc-h1 toc-link" data-title="Recovering passwords">Recovering passwords</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-temporary-password" class="toc-h2 toc-link" data-title="Recovering passwords">Request temporary password</a>
+                  </li>
+                  <li>
+                    <a href="#reset-the-password" class="toc-h2 toc-link" data-title="Recovering passwords">Reset the password</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#keys" class="toc-h1 toc-link" data-title="Keys">Keys</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#todo" class="toc-h2 toc-link" data-title="Keys">TODO</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#create-source-text" class="toc-h1 toc-link" data-title="Create Source Text">Create Source Text</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#1-creatie-source-language" class="toc-h2 toc-link" data-title="Create Source Text">1 Creatie Source Language</a>
+                  </li>
+                  <li>
+                    <a href="#2-upload-source-text" class="toc-h2 toc-link" data-title="Create Source Text">2 Upload Source Text</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#token-words" class="toc-h1 toc-link" data-title="Token Words">Token Words</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-token-words" class="toc-h2 toc-link" data-title="Token Words">Get Token Words</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#translations" class="toc-h1 toc-link" data-title="Translations">Translations</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-new-translation" class="toc-h2 toc-link" data-title="Translations">Create new translation</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#corrections" class="toc-h1 toc-link" data-title="Corrections">Corrections</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#update-corrections" class="toc-h2 toc-link" data-title="Corrections">Update corrections</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#suggestions" class="toc-h1 toc-link" data-title="Suggestions">Suggestions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-suggestions" class="toc-h2 toc-link" data-title="Suggestions">Get suggestions</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
       </div>
         <ul class="toc-footer">
             <li><a href="https://mt2414.in">Sign Up for a Developer Key</a></li>
@@ -117,64 +306,131 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the AutographaMT API Documentation! You can use our API to access AutographaMT API endpoints to accelerate Bible translations. The AutographaMT APIs are accessed through a AutographaMT client.</p>
 
-<p>Welcome to the MT2414 API! You can use our API to access MT2414 API endpoints to accelerate Bible translations.</p>
+<p>The documentation on how to use the AutographaMT client application is provided on <a href="https://autographamt.bridgeconn.com">it&#39;s website</a>. </p>
+<h1 id='new-user-registration'>New user registration</h1>
+<p>Currently anyone with a valid email address can register and access the resources on the AutographaMT server.</p>
 
-<h1 id="authentication">Authentication</h1>
+<blockquote>
+<p>To register a new user account:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># If you have curl installed, you can directly access the APIs listed here. Alternativeley, you can use the Postman plugin (Firefox and Chrome).</span>
 
+curl -X POST 
+  -d <span class="s2">"email=&lt;email_id&gt;"</span> 
+  -d <span class="s2">"password=&lt;password&gt;"</span> 
+  https://api.autographamt.bridgeconn.com/v1/registration
+
+<span class="gp">&gt; </span>Server will send a verification email to the email_id provided by the user, <span class="k">if </span>the given email_id is not used <span class="k">for </span>registering any other user accounts.
+
+<span class="gp">&gt; </span>It will also <span class="k">return </span>a message <span class="sb">`</span><span class="o">{</span><span class="s2">"success"</span>:true, <span class="s2">"message"</span>:<span class="s2">"Verification Email Sent"</span><span class="o">}</span><span class="sb">`</span> <span class="k">if </span>it accepts the credentials provided by the user. If the email_id is already used <span class="k">for </span>registering a user account, it will <span class="k">return </span>a message, <span class="sb">`</span><span class="o">{</span><span class="s2">"success"</span>:false, <span class="s2">"message"</span>:<span class="s2">"Email Already Exists"</span><span class="o">}</span><span class="sb">`</span>
+</code></pre><h2 id='verification'>Verification</h2>
+<p>When the user clicks on the verification link sent to the email id, the verification request is submitted to the /verification endpoint.</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/verification/&lt;verification_code&gt;"</span>
+  -X GET
+
+<span class="gp">&gt; </span>After the succesfful verification, the user will be directed to the homepage of the client app.
+</code></pre><h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: secretkey"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/auth&gt;"</span>
+  -X POST 
+  -d <span class="s2">"email=&lt;email_id&gt;"</span> 
+  -d <span class="s2">"password=&lt;password&gt;"</span>
+
+<span class="gp">&gt; </span>This will <span class="k">return </span>the <span class="sb">`</span>secretkey<span class="sb">`</span> to access the API server.
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">secretkey</code> with your API key.</p>
-</blockquote>
+<p>AutographaMT uses API keys to allow access to the APIs. You can register a new AutographaMT API key at our <a href="https://augtographamt.bridgeconn.com">site</a>. To authorize a user on the API side, we use JWT tokens. These have to be added to all requests using the following header.</p>
 
-<p>MT2414 uses API keys to allow access to the API. You can register a new MT2414 API key at our <a href="https://mt2414.in">site</a>.</p>
-
-<p>MT2414 expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: secretkey</code></p>
+<p><code>Authorization: Bearer &lt;jwt&gt;</code></p>
 
 <aside class="notice">
-You must replace <code>secretkey</code> with your personal API key.
+You must replace <code>secretkey</code> with your personal API key. JSON Web Tokens (JWT) are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 </aside>
+<h1 id='recovering-passwords'>Recovering passwords</h1>
+<p>Recovering of the forgotten passwords is done in two stages.</p>
+<h2 id='request-temporary-password'>Request temporary password</h2>
+<p>User requests to reset the password by providing the email id to reset the password along with a link to the /forgotpassword endpoint.</p>
 
-<h1 id="token-words">Token Words</h1>
+<p>If the email Id submitted is on the server and is verified the system will generate a temporary password and sends it to the user&#39;s email id.</p>
 
-<h2 id="get-token-words">Get Token Words</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
+<p>It will also return <code>{&quot;success&quot;:true, &quot;message&quot;:&quot;Link to reset password has been sent to the registered mail ID&quot;}</code></p>
+
+<p>If no such email registered on the server, </p>
+
+<p>it will return <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;Email has not yet been registered&quot;}</code></p>
+
+<blockquote>
+<p>To send the request for a temporary password</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/resetpassword"</span>
+  -X POST 
+  -d <span class="s2">"email=&lt;email&gt;"</span> 
+
+<span class="gp">&gt; </span>Server will send a temporary password with the link to the /forgotpasword
+</code></pre><h2 id='reset-the-password'>Reset the password</h2>
+<p>User can then submit a new password, along with the temporary password sent by the system.</p>
+
+<p>If the temporary password matches the password sent by the server, the hash + salt of the new password is stored as the new password. The server will return a message <code>{&quot;success&quot;:true, &quot;message&quot;:&quot;Password has been reset. Login with the new password.&quot;}</code></p>
+
+<p>If the temporary password doesn&#39;t match with the server&#39;s temporary password, it will return an error message <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;Invalid temporary password.&quot;}</code></p>
+
+<blockquote>
+<p>To send the request for a temporary password</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/forgotpassword"</span>
+  -X POST 
+  -d <span class="s2">"temp_password=&lt;temp_password&gt;"</span> 
+  -d <span class="s2">"password=&lt;new_password&gt;"</span>
+</code></pre><h1 id='keys'>Keys</h1>
+<p>The /v1/keys will permit a client application to interact with the system without having to call the /auth all the time. </p>
+<h3 id='todo'>TODO</h3><h1 id='create-source-text'>Create Source Text</h1>
+<p>To create a new source language and upload text in the source langugage to the server.</p>
+<h2 id='1-creatie-source-language'>1 Creatie Source Language</h2>
+<p>An administrator can select the name of the language and supply the version name to create a source langauge.</p>
+<pre class="highlight shell tab-shell"><code>curl
+  -X
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span>
+  -d <span class="s1">'{"language":"&lt;language&gt;", "&lt;version&gt;":"&lt;version&gt;"}'</span> 
+  <span class="s2">"https://api.mt2414.in/v1/createsources"</span>
+</code></pre><h2 id='2-upload-source-text'>2 Upload Source Text</h2>
+<p>Once a language and version is assigned to be used as a source, user can upload the source text for that language. You can call the /sources api to upload the content.</p>
+<pre class="highlight shell tab-shell"><code>curl 
+  -X POST 
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s2">"source_id=&lt;source_id&gt;"</span> 
+  -f <span class="s2">"content=&lt;content&gt;"</span> 
+  https://api.mt2414.in/v1/sources
+
+</code></pre>
+<aside class="notice">
+The content submitted must be in valid usfm format. At a minimum the file should contain \id followed by a valid 3 letter Book id. Each book must be a separate file.
+</aside>
+<h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"tokenwords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"tokenwords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="s2">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="s2">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all token words.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;</code></p>
-
-<h1 id="translations">Translations</h1>
-
-<h2 id="create-new-translation">Create new translation</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/translations"</span>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;</code></p>
+<h1 id='translations'>Translations</h1><h2 id='create-new-translation'>Create new translation</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/translations"</span>
   -X POST
   -H <span class="s2">"Authorization: secretkey"</span>
   -d <span class="s1">'{
@@ -192,19 +448,13 @@ You must replace <code>secretkey</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.mt2414.in/v1/translations</code></p>
-
-<h1 id="corrections">Corrections</h1>
-
-<h2 id="update-corrections">Update corrections</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/corrections"</span>
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.mt2414.in/v1/translations</code></p>
+<h1 id='corrections'>Corrections</h1><h2 id='update-corrections'>Update corrections</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/corrections"</span>
   -X POST
   -H <span class="s2">"Authorization: secretkey"</span>
   -d <span class="s1">'{
@@ -216,35 +466,25 @@ You must replace <code>secretkey</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.mt2414.in/v1/corrections</code></p>
-
-<h1 id="suggestions">Suggestions</h1>
-
-<h2 id="get-suggestions">Get suggestions</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;"</span>
+</span></code></pre><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://api.mt2414.in/v1/corrections</code></p>
+<h1 id='suggestions'>Suggestions</h1><h2 id='get-suggestions'>Get suggestions</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-</span><span class="nt">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="nt">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;</code></p>
-
-          <h1 id="errors">Errors</h1>
-
+</span></code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;</code></p>
+<h1 id='errors'>Errors</h1>
 <p>The MT2414 API uses the following error codes:</p>
 
 <table><thead>
@@ -255,35 +495,47 @@ You must replace <code>secretkey</code> with your personal API key.
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request</td>
+<td>Bad Request -- Your request sucks.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized -- Your API key is wrong.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found</td>
+<td>Not Found -- The specified kitten could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
