@@ -124,7 +124,17 @@ curl
   -H "Authorization:bearer <access token>"
   -d '{"language":"<language>", "<version>":"<version>"}' 
   "https://api.mt2414.in/v1/createsources"
+
+> You can call the /v1/sourceid to get the id of a source language
+
+curl 
+  -X POST 
+  -H "Authorization:bearer <access token>" 
+  -d '{"language":"<language>", "<version>":"<version>"}' 
+  "https://api.mt2414.in/v1/sourceid"
+
 ```
+
 ## 2 Upload Source Text
 Once a language and version is assigned to be used as a source, user can upload the source text for that language. You can call the /sources api to upload the content.
 
