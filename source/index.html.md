@@ -224,6 +224,39 @@ curl
 > Response (3 letter ISO code + revision number)
 [["MRK", "1"], ["GAL", "1"], ["MAT", "1"], ["ROM", "1"], ["JHN", "1"], ["LUK", "1"], ["ACT", "1"], ["EPH", "1"], ["PHP", "1"], ["COL", "1"], ["TIT", "1"], ["PHM", "1"], ["HEB", "1"], ["JAS", "1"], ["REV", "1"], ["JUD", "1"], ["1CO", "1"], ["2CO", "1"], ["1TH", "1"], ["2TH", "1"], ["1TI", "1"], ["2TI", "1"], ["1PE", "1"], ["2PE", "1"], ["1JN", "1"], ["2JN", "1"], ["3JN", "1"]]
 ``` 
+# Download Tokens
+As soon as a source text is submitted to the server, it will generate the tokens save it in a database. A user can download the entire set, tokens for a specific book(s) or the tokens for a set of book(s) excluding the tokens already included in a previous set.
+
+In order to download the tokens, user have to specify the source from where (s)he want to download the tokens for. User must specify the language, version and the revision of the source along with the book(s) (s)he wanted to download the tokens for.
+
+## List existing sources
+The following APIs can be called to find the existing source text information.
+
+### Languages
+Please see the [section above](./#get-source-language-list)
+
+### Version
+A language can have more than one version of the Bible, and each version can be uploaded to the server using a separate unique version name. To list all the versions available for a specific language, call the `/versions` api.
+
+```shell
+
+> CURL
+curl 
+  -X 
+  -H "Authorization:bearer <access token>" 
+  -d '{"language":"<language>"}' 
+  "https://api.autographamt.bridgeconn.com/v1/version"
+
+> Example
+curl 
+  -X 
+  -H "Authorization:bearer <access token>" 
+  -d '{"language":"ori"}' 
+  "https://api.autographamt.bridgeconn.com/v1/version"
+
+> Response (List of versions)
+["GL-ORYA-NT", "OBS"]
+```
 # Token Words
 
 ## Get Token Words
