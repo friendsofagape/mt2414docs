@@ -437,28 +437,26 @@ The content submitted must be in valid usfm format. At a minimum the file should
 <h2 id='get-source-language-list'>Get source language list</h2>
 <p>To get the list of available source langauges on the server, a user can call the api <code>/language</code>. In response, the server will return the list of language ISO codes available on the server.</p>
 
-<p>If the server couldn&#39;t find any languages, the response will be <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No Languages&quot;}</code>
-```shell</p>
-
-<blockquote>
-<p>CURL
+<p>If the server couldn&#39;t find any languages, the response will be <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No Languages&quot;}</code>.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
 curl
   -X POST
-  -H &quot;Authorization:bearer <access token>&quot;
-  &quot;https://api.autographamt.bridgeconn.com/v1/language&quot;</p>
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span>
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/language"</span>
 
-<p>Example
+<span class="gp">&gt; </span>Example
 curl
   -X POST
-  -H &quot;Authorization:bearer <YOUR ACCESS TOKEN>&quot; 
-  &quot;https://api.autographamt.bridgeconn.com/v1/language&quot;</p>
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/language"</span>
 
-<p>Repsonse (list of 3 letter ISO codes of the lanagues available)
-[&quot;guj&quot;, &quot;tel&quot;, &quot;khn&quot;, &quot;ori&quot;, &quot;mar&quot;, &quot;hin&quot;]
-``` </p>
-</blockquote>
-<h2 id='get-source-text-list'>Get source text list</h2>
+<span class="gp">&gt; </span>Repsonse <span class="o">(</span>list of 3 letter ISO codes of the lanagues available<span class="o">)</span>
+<span class="o">[</span><span class="s2">"guj"</span>, <span class="s2">"tel"</span>, <span class="s2">"khn"</span>, <span class="s2">"ori"</span>, <span class="s2">"mar"</span>, <span class="s2">"hin"</span><span class="o">]</span>
+</code></pre><h2 id='get-source-text-list'>Get source text list</h2>
 <p>To get the list of available source languages <em>with the versions name</em>, a user can call the api <code>/get_languages</code>. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.</p>
+
+<p>If the server couldn&#39;t find any text matching the language-version name, the response will be <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No Languages&quot;}</code>.</p>
 <pre class="highlight shell tab-shell"><code>
 <span class="gp">&gt; </span>CURL
 curl
