@@ -277,6 +277,32 @@
               </ul>
           </li>
           <li>
+            <a href="#download-tokens" class="toc-h1 toc-link" data-title="Download Tokens">Download Tokens</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-existing-sources" class="toc-h2 toc-link" data-title="Download Tokens">List existing sources</a>
+                  </li>
+                  <li>
+                    <a href="#languages" class="toc-h2 toc-link" data-title="Download Tokens">- Languages</a>
+                  </li>
+                  <li>
+                    <a href="#version" class="toc-h2 toc-link" data-title="Download Tokens">- Version</a>
+                  </li>
+                  <li>
+                    <a href="#revision" class="toc-h2 toc-link" data-title="Download Tokens">- Revision</a>
+                  </li>
+                  <li>
+                    <a href="#download-tokens-2" class="toc-h2 toc-link" data-title="Download Tokens">Download Tokens</a>
+                  </li>
+                  <li>
+                    <a href="#tokens-complete-set" class="toc-h2 toc-link" data-title="Download Tokens">- Tokens Complete Set</a>
+                  </li>
+                  <li>
+                    <a href="#excluded-set" class="toc-h2 toc-link" data-title="Download Tokens">- Excluded Set</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#token-words" class="toc-h1 toc-link" data-title="Token Words">Token Words</a>
               <ul class="toc-list-h2">
                   <li>
@@ -493,7 +519,107 @@ curl
 
 <span class="gp">&gt; </span>Response <span class="o">(</span>3 letter ISO code + revision number<span class="o">)</span>
 <span class="o">[[</span><span class="s2">"MRK"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"GAL"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"MAT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"ROM"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JHN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"LUK"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"ACT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"EPH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"PHP"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"COL"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"TIT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"PHM"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"HEB"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JAS"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"REV"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JUD"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1CO"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2CO"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1TH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2TH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1TI"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2TI"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1PE"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2PE"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1JN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2JN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"3JN"</span>, <span class="s2">"1"</span><span class="o">]]</span>
-</code></pre><h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
+</code></pre><h1 id='download-tokens'>Download Tokens</h1>
+<p>As soon as a source text is submitted to the server, it will generate the tokens save it in a database. </p>
+
+<p>In order to download the tokens, user have to specify the source from where (s)he want to download the tokens for. User must specify the language, version and the revision of the source along with the book(s) (s)he wanted to download the tokens for.</p>
+<h2 id='list-existing-sources'>List existing sources</h2>
+<p>The following APIs can be called to find the existing source text information.</p>
+<h2 id='languages'>- Languages</h2>
+<p>Please see the <a href="./#get-source-language-list">section above</a></p>
+<h2 id='version'>- Version</h2>
+<p>A language can have more than one version of the Bible, and each version can be uploaded to the server using a separate unique version name. To list all the versions available for a specific language, call the <code>/versions</code> api.</p>
+
+<p>Response in case no versions available for the given langauge, <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No version&quot;}</code>.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl 
+  -X 
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s1">'{"language":"&lt;language&gt;"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/version"</span>
+
+<span class="gp">&gt; </span>Example
+curl 
+  -X 
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  -d <span class="s1">'{"language":"ori"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/version"</span>
+
+<span class="gp">&gt; </span>Response <span class="o">(</span>List of versions<span class="o">)</span>
+<span class="o">[</span><span class="s2">"GL-ORYA-NT"</span>, <span class="s2">"OBS"</span><span class="o">]</span>
+</code></pre><h2 id='revision'>- Revision</h2>
+<p>In many cases the source text itself is dynamic in nature. It will undergo several changes in course of time. In order to keep track of this, AutographaMT uses revision numbers. Every time a text is submitted it is automatically assigned a revision number. If anybody submit an updated version of an existing book, a new revision is created and the files is saved as a new revision. This will enable the engine to generate a translation even after the text gets revised between the token download and the tokens submission.</p>
+
+<p>The <code>/revision</code> api takes the language name and the version number as input and will send a list of revisions available as a response.</p>
+
+<p>In case no records matches the language name and the version number submitted the user, a response will be sent to the user/client with the message <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No books available&quot;}</code>.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl 
+  -X 
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s1">'{"language":"&lt;language&gt;", "version":"&lt;version&gt;"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/revision"</span>
+
+<span class="gp">&gt; </span>Example
+curl 
+  -X 
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  -d <span class="s1">'{"language":"ori", "version":"ULB"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/revision"</span>
+
+<span class="gp">&gt; </span>Response <span class="o">(</span>List of versions<span class="o">)</span>
+<span class="o">[</span><span class="s2">"1"</span><span class="o">]</span>
+</code></pre><h2 id='download-tokens-2'>Download Tokens</h2>
+<p>There are two different ways a user can download tokens. A user can download the entire set of tokens for a specific set book(s) or the tokens for a set of book(s) excluding the tokens already included in a previous set.</p>
+<h2 id='tokens-complete-set'>- Tokens Complete Set</h2>
+<p>If the complete set of tokens are to be downloaded, a user can send the list of book(s) along with the language name, version and revision to the  <code>/bookwiseautotokens</code>. Server in response will send the complete set of tokens for the books specified, if they are available on the server. In case if the books are not present, server will respond with one of the following messages.</p>
+
+<ul>
+<li><p>If Source is not found <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;Source is not available. Upload source.&quot;}</code></p></li>
+<li><p>If no books are selected <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;Select any books from include books&quot;}</code></p></li>
+<li><p>If no books are selected to be include list, but some books are selected in the exclude list <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;Select any books from include books&quot;}</code>.</p></li>
+</ul>
+<pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
+
+curl 
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s1">'{"sourcelang":"sourcelang", "&lt;version&gt;":"&lt;version&gt;", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"&lt;targetlang&gt;"}'</span> <span class="s2">"https://api.mt2414.in/v1/getbookwiseautotokens"</span>
+
+<span class="gp">&gt; </span>Example
+curl
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span>
+  -d <span class="s1">'{"sourcelang":"ori", "version":"GL-ORYA-NT", "revision":"1", "books":["PHM", "2JN"], "nbooks": ["3JN"], "targetlang":"hin"}'</span>
+  <span class="s2">"https://api.mt2414.in/v1/getbookwiseautotokens"</span>
+
+<span class="gp">&gt; </span>Response <span class="o">(</span>Tokens of the selected books as an Excel Sheet<span class="o">)</span>
+
+</code></pre><h2 id='excluded-set'>- Excluded Set</h2>
+<p>The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the <code>nbooks</code> list will be removed after creating the tokens for the <code>books</code> selected.</p>
+<pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
+
+curl 
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
+  -d <span class="s1">'{"sourcelang":"sourcelang", "&lt;version&gt;":"&lt;version&gt;", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"&lt;targetlang&gt;"}'</span> <span class="s2">"https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"</span>
+
+<span class="gp">&gt; </span>Example
+curl
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span>
+  -d <span class="s1">'{"sourcelang":"ori", "version":"GL-ORYA-NT", "revision":"1", "books":["PHM", "2JN"], "nbooks": ["3JN"], "targetlang":"hin"}'</span>
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"</span>
+
+<span class="gp">&gt; </span>Response 
+Tokens of the selected books as an Excel Sheet
+</code></pre>
+<aside class="notice">
+Supply the books to be included in the token generation as a value of *books* and the books to be excluded in the *nbooks*.
+</aside>
+<h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
