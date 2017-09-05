@@ -255,10 +255,24 @@
             <a href="#create-source-text" class="toc-h1 toc-link" data-title="Create Source Text">Create Source Text</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#1-creatie-source-language" class="toc-h2 toc-link" data-title="Create Source Text">1 Creatie Source Language</a>
+                    <a href="#1-create-source-language" class="toc-h2 toc-link" data-title="Create Source Text">1 Create Source Language</a>
                   </li>
                   <li>
                     <a href="#2-upload-source-text" class="toc-h2 toc-link" data-title="Create Source Text">2 Upload Source Text</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#source-text-information" class="toc-h1 toc-link" data-title="Source text information">Source text information</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-source-language-list" class="toc-h2 toc-link" data-title="Source text information">Get source language list</a>
+                  </li>
+                  <li>
+                    <a href="#get-source-text-list" class="toc-h2 toc-link" data-title="Source text information">Get source text list</a>
+                  </li>
+                  <li>
+                    <a href="#get-the-book-list" class="toc-h2 toc-link" data-title="Source text information">Get the book list</a>
                   </li>
               </ul>
           </li>
@@ -299,7 +313,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href="https://mt2414.in">Sign Up for a Developer Key</a></li>
+            <li><a href="https://autographamt.bridgeconn.com">Sign Up for a Developer Key</a></li>
             <li><a href="https://github.com/lord/slate">Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -319,7 +333,7 @@
 <pre class="highlight shell tab-shell"><code><span class="c"># If you have curl installed, you can directly access the APIs listed here. Alternativeley, you can use the Postman plugin (Firefox and Chrome).</span>
 
 curl -X POST 
-  -d <span class="s2">"email=&lt;email_id&gt;"</span> 
+  -d <span class="s2">"username=&lt;email_id&gt;"</span> 
   -d <span class="s2">"password=&lt;password&gt;"</span> 
   https://api.autographamt.bridgeconn.com/v1/registration
 
@@ -336,9 +350,9 @@ curl -X POST
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/auth&gt;"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.autographamt.bridgeconn.com/v1/auth"</span>
   -X POST 
-  -d <span class="s2">"email=&lt;email_id&gt;"</span> 
+  -d <span class="s2">"username=&lt;email_id&gt;"</span> 
   -d <span class="s2">"password=&lt;password&gt;"</span>
 
 <span class="gp">&gt; </span>This will <span class="k">return </span>the <span class="sb">`</span>secretkey<span class="sb">`</span> to access the API server.
@@ -389,7 +403,7 @@ You must replace <code>secretkey</code> with your personal API key. JSON Web Tok
 <p>The /v1/keys will permit a client application to interact with the system without having to call the /auth all the time. </p>
 <h3 id='todo'>TODO</h3><h1 id='create-source-text'>Create Source Text</h1>
 <p>To create a new source language and upload text in the source langugage to the server.</p>
-<h2 id='1-creatie-source-language'>1 Creatie Source Language</h2>
+<h2 id='1-create-source-language'>1 Create Source Language</h2>
 <p>An administrator can select the name of the language and supply the version name to create a source langauge.</p>
 <pre class="highlight shell tab-shell"><code>curl
   -X
@@ -412,13 +426,76 @@ curl
   -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
   -d <span class="s2">"source_id=&lt;source_id&gt;"</span> 
   -f <span class="s2">"content=&lt;content&gt;"</span> 
-  https://api.mt2414.in/v1/sources
+  <span class="s2">"https://api.mt2414.in/v1/sources"</span>
 
 </code></pre>
 <aside class="notice">
 The content submitted must be in valid usfm format. At a minimum the file should contain \id followed by a valid 3 letter Book id. Each book must be a separate file.
 </aside>
-<h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
+<h1 id='source-text-information'>Source text information</h1>
+<p>The following APIs can be called to access the information of source langauges, version and texts available on the server.</p>
+<h2 id='get-source-language-list'>Get source language list</h2>
+<p>To get the list of available source langauges on the server, a user can call the api <code>/language</code>. In response, the server will return the list of language ISO codes available on the server.</p>
+
+<p>If the server couldn&#39;t find any languages, the response will be <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No Languages&quot;}</code>
+```shell</p>
+
+<blockquote>
+<p>CURL
+curl
+  -X POST
+  -H &quot;Authorization:bearer <access token>&quot;
+  &quot;https://api.autographamt.bridgeconn.com/v1/language&quot;</p>
+
+<p>Example
+curl
+  -X POST
+  -H &quot;Authorization:bearer <YOUR ACCESS TOKEN>&quot; 
+  &quot;https://api.autographamt.bridgeconn.com/v1/language&quot;</p>
+
+<p>Repsonse (list of 3 letter ISO codes of the lanagues available)
+[&quot;guj&quot;, &quot;tel&quot;, &quot;khn&quot;, &quot;ori&quot;, &quot;mar&quot;, &quot;hin&quot;]
+``` </p>
+</blockquote>
+<h2 id='get-source-text-list'>Get source text list</h2>
+<p>To get the list of available source languages <em>with the versions name</em>, a user can call the api <code>/get_languages</code>. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span>
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/get_languages"</span>
+
+<span class="gp">&gt; </span>Examples
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  <span class="s2">"https://api.autographamt.brideconn.com/v1/get_languages"</span>
+
+<span class="gp">&gt; </span>Response <span class="o">(</span>3 letter ISO code of the language + version name<span class="o">)</span>
+<span class="o">[[</span><span class="s2">"ori"</span>, <span class="s2">"GL-ORYA-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"mar"</span>, <span class="s2">"GL-MAR-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"guj"</span>, <span class="s2">"GL-GUJ-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"ori"</span>, <span class="s2">"OBS"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"tel"</span>, <span class="s2">"GL-TEL-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"hin"</span>, <span class="s2">"GL-HIN-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"khn"</span>, <span class="s2">"OA-KHN-NT"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"hin"</span>, <span class="s2">"GL-HIN-PSA-PRO"</span><span class="o">]]</span>
+</code></pre><h2 id='get-the-book-list'>Get the book list</h2>
+<p>To get the list of books and it&#39;s revision number of the a given version of a source language, a user can call the <code>/get_books</code> api. In response, the server will return a list of all the books as 3 letter book id and revision number paired as a list.</p>
+
+<p>If the server couldn&#39;t find the given combination it will send <code>{&quot;success&quot;:false, &quot;message&quot;:&quot;No books available&quot;}</code> as the response.</p>
+<pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
+
+curl
+  -X POST
+  -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span>
+  -d <span class="s1">'{"language":"&lt;language_id&gt;", "version":"&lt;version_name&gt;"}'</span>
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/get_books"</span>
+
+<span class="gp">&gt; </span>Example
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization:bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  -d <span class="s1">'{"language":"ori", "version":"GL-ORYA-NT"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/get_books"</span>
+
+<span class="gp">&gt; </span>Response <span class="o">(</span>3 letter ISO code + revision number<span class="o">)</span>
+<span class="o">[[</span><span class="s2">"MRK"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"GAL"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"MAT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"ROM"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JHN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"LUK"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"ACT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"EPH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"PHP"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"COL"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"TIT"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"PHM"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"HEB"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JAS"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"REV"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"JUD"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1CO"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2CO"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1TH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2TH"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1TI"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2TI"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1PE"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2PE"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"1JN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"2JN"</span>, <span class="s2">"1"</span><span class="o">]</span>, <span class="o">[</span><span class="s2">"3JN"</span>, <span class="s2">"1"</span><span class="o">]]</span>
+</code></pre><h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
