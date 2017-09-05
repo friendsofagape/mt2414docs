@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href="https://mt2414.in">Sign Up for a Developer Key</a>
+  - <a href="https://autographamt.bridgeconn.com">Sign Up for a Developer Key</a>
   - <a href="https://github.com/lord/slate">Documentation Powered by Slate</a>
 
 includes:
@@ -29,7 +29,7 @@ Currently anyone with a valid email address can register and access the resource
 # If you have curl installed, you can directly access the APIs listed here. Alternativeley, you can use the Postman plugin (Firefox and Chrome).
 
 curl -X POST 
-  -d "email=<email_id>" 
+  -d "username=<email_id>" 
   -d "password=<password>" 
   https://api.autographamt.bridgeconn.com/v1/registration
 
@@ -51,9 +51,9 @@ curl "https://api.autographamt.bridgeconn.com/v1/verification/<verification_code
 > To authorize, use this code:
 
 ```shell
-curl "https://api.autographamt.bridgeconn.com/v1/auth>"
+curl "https://api.autographamt.bridgeconn.com/v1/auth"
   -X POST 
-  -d "email=<email_id>" 
+  -d "username=<email_id>" 
   -d "password=<password>"
 
 > This will return the `secretkey` to access the API server.
@@ -115,7 +115,7 @@ The /v1/keys will permit a client application to interact with the system withou
 # Create Source Text
 To create a new source language and upload text in the source langugage to the server.
 
-## 1 Creatie Source Language
+## 1 Create Source Language
 An administrator can select the name of the language and supply the version name to create a source langauge.
 
 ```shell
@@ -144,12 +144,47 @@ curl
   -H "Authorization:bearer <access token>" 
   -d "source_id=<source_id>" 
   -f "content=<content>" 
-  https://api.mt2414.in/v1/sources
+  "https://api.mt2414.in/v1/sources"
 
 ```
 <aside class="notice">
 The content submitted must be in valid usfm format. At a minimum the file should contain \id followed by a valid 3 letter Book id. Each book must be a separate file.
 </aside>
+
+# Language information
+The following APIs can be called to access the information of source langauges, version and texts available on the server.
+
+## Get source language list
+To get the list of available source langauges on the server, a user can call the api /language. In response, the server will return the list of language ISO codes available on the server.
+
+```shell
+curl
+  -X POST
+  -H "Authorization:bearer <access token>"
+  "https://api.autographamt.bridgeconn.com/v1/language"
+``` 
+
+## Get source text list
+To get the list of available source languages *with the versions name*, a user can call the api /get_languages. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.
+
+```shell
+curl
+  -X POST
+  -H "Authorization:bearer <access token>"
+  "https://api.autographamt.bridgeconn.com/v1/get_languages"
+``` 
+## Get the book list
+To get the list of books and it's revision number of the a given version of a source language, a user can call the /get_books api. In response, the server will return a list of all the books as 3 letter book id and revision number paired as a list.
+
+If the server couldn't find the given combination it will send ```{"success":false, "message":"No books available"}``` as the response.
+
+```shell
+curl
+  -X POST
+  -H "Authorization:bearer <access token>"
+  -d '{"language":"<language_id>", "version":"<version_name>"}'
+  "https://api.autographamt.bridgeconn.com/v1/get_books"
+``` 
 
 # Token Words
 
