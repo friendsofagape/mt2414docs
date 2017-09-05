@@ -157,7 +157,8 @@ The following APIs can be called to access the information of source langauges, 
 ## Get source language list
 To get the list of available source langauges on the server, a user can call the api `/language`. In response, the server will return the list of language ISO codes available on the server.
 
-If the server couldn't find any languages, the response will be `{"success":false, "message":"No Languages"}`
+If the server couldn't find any languages, the response will be `{"success":false, "message":"No Languages"}`.
+
 ```shell
 
 > CURL
@@ -178,6 +179,8 @@ curl
 
 ## Get source text list
 To get the list of available source languages *with the versions name*, a user can call the api `/get_languages`. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.
+
+If the server couldn't find any text matching the language-version name, the response will be `{"success":false, "message":"No Languages"}`.
 
 ```shell
 
