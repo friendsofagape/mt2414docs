@@ -318,7 +318,7 @@ curl
 ```
 
 ##  - Excluded Set
-The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the `nbooks` list will be removed after creating the tokens for the `books` selected.
+The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the `nbooks` list will be removed after creating the tokens for the `books` selected. In this way a team can avoid the duplication of the work.
 
 ```shell
 > CURL
@@ -339,7 +339,11 @@ curl
 Tokens of the selected books as an Excel Sheet
 ```
 <aside class="notice">
-Supply the books to be included in the token generation as a value of *books* and the books to be excluded in the *nbooks*.
+Supply the books to be included in the token generation as a value of "books" and the books to be excluded in the "nbooks".
+</aside>
+
+<aside class="warning">
+If you use the exclude tokens, the translation can't be complete until the user uploads the first sets of tokens generated.
 </aside>
 # Token Words
 
