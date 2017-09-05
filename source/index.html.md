@@ -345,6 +345,48 @@ Supply the books to be included in the token generation as a value of "books" an
 <aside class="warning">
 If you use the exclude tokens, the translation can't be complete until the user uploads the first sets of tokens generated.
 </aside>
+
+# Submit Translated Tokens
+To submit the translated tokens back to the server, `/uploadtokentransltion` api can be called. The translated tokens must be in either `xls` or in `xlsx` (preferred) format.
+
+In order to upload the translated tokens, user must specify the target language. 
+
+## List of target languages
+To get the list of currently available target languages, use `/languagelist` api. 
+
+```shell
+> CURL
+curl 
+  -H "Authorization:bearer <access token>" 
+  "https://api.autographamt.bridgeconn.com/v1/languagelist"
+
+> Example
+curl 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
+  "https://api.autographamt.bridgeconn.com/v1/languagelist"
+
+> Response 
+'{"English": "en", "Malayalam": "ml", "Hindi": "hi", ...}'
+```
+
+## Update language list
+AutographaMT lists all the Indian languages listed in [`translationDatabase`]("http://td.unfoldingword.org/exports/langnames.json") which is maintained by the unfoldingword.org team. To update the list on the AutographaMT server, user can call the `/updatelanguagelist` api.
+
+```shell
+> CURL
+curl 
+  -H "Authorization:bearer <access token>" 
+  "https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"
+
+> Example
+curl 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
+  "https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"
+
+> Response 
+{"success":true, "message":"Language List updated."}
+```
+
 # Token Words
 
 ## Get Token Words
