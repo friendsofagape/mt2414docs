@@ -598,7 +598,7 @@ curl
 <span class="gp">&gt; </span>Response <span class="o">(</span>Tokens of the selected books as an Excel Sheet<span class="o">)</span>
 
 </code></pre><h2 id='excluded-set'>- Excluded Set</h2>
-<p>The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the <code>nbooks</code> list will be removed after creating the tokens for the <code>books</code> selected.</p>
+<p>The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the <code>nbooks</code> list will be removed after creating the tokens for the <code>books</code> selected. In this way a team can avoid the duplication of the work.</p>
 <pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
 
 curl 
@@ -617,7 +617,11 @@ curl
 Tokens of the selected books as an Excel Sheet
 </code></pre>
 <aside class="notice">
-Supply the books to be included in the token generation as a value of *books* and the books to be excluded in the *nbooks*.
+Supply the books to be included in the token generation as a value of "books" and the books to be excluded in the "nbooks".
+</aside>
+
+<aside class="warning">
+If you use the exclude tokens, the translation can't be complete until the user uploads the first sets of tokens generated.
 </aside>
 <h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
