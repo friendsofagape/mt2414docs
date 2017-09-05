@@ -225,18 +225,20 @@ curl
 [["MRK", "1"], ["GAL", "1"], ["MAT", "1"], ["ROM", "1"], ["JHN", "1"], ["LUK", "1"], ["ACT", "1"], ["EPH", "1"], ["PHP", "1"], ["COL", "1"], ["TIT", "1"], ["PHM", "1"], ["HEB", "1"], ["JAS", "1"], ["REV", "1"], ["JUD", "1"], ["1CO", "1"], ["2CO", "1"], ["1TH", "1"], ["2TH", "1"], ["1TI", "1"], ["2TI", "1"], ["1PE", "1"], ["2PE", "1"], ["1JN", "1"], ["2JN", "1"], ["3JN", "1"]]
 ``` 
 # Download Tokens
-As soon as a source text is submitted to the server, it will generate the tokens save it in a database. A user can download the entire set, tokens for a specific book(s) or the tokens for a set of book(s) excluding the tokens already included in a previous set.
+As soon as a source text is submitted to the server, it will generate the tokens save it in a database. 
 
 In order to download the tokens, user have to specify the source from where (s)he want to download the tokens for. User must specify the language, version and the revision of the source along with the book(s) (s)he wanted to download the tokens for.
 
 ## List existing sources
 The following APIs can be called to find the existing source text information.
 
-### Languages
+##  - Languages
 Please see the [section above](./#get-source-language-list)
 
-### Version
+##  - Version
 A language can have more than one version of the Bible, and each version can be uploaded to the server using a separate unique version name. To list all the versions available for a specific language, call the `/versions` api.
+
+Response in case no versions available for the given langauge, `{"success":false, "message":"No version"}`.
 
 ```shell
 
@@ -250,13 +252,95 @@ curl
 > Example
 curl 
   -X 
-  -H "Authorization:bearer <access token>" 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
   -d '{"language":"ori"}' 
   "https://api.autographamt.bridgeconn.com/v1/version"
 
 > Response (List of versions)
 ["GL-ORYA-NT", "OBS"]
 ```
+
+##  - Revision
+In many cases the source text itself is dynamic in nature. It will undergo several changes in course of time. In order to keep track of this, AutographaMT uses revision numbers. Every time a text is submitted it is automatically assigned a revision number. If anybody submit an updated version of an existing book, a new revision is created and the files is saved as a new revision. This will enable the engine to generate a translation even after the text gets revised between the token download and the tokens submission.
+
+The `/revision` api takes the language name and the version number as input and will send a list of revisions available as a response.
+
+In case no records matches the language name and the version number submitted the user, a response will be sent to the user/client with the message `{"success":false, "message":"No books available"}`.
+
+```shell
+
+> CURL
+curl 
+  -X 
+  -H "Authorization:bearer <access token>" 
+  -d '{"language":"<language>", "version":"<version>"}' 
+  "https://api.autographamt.bridgeconn.com/v1/revision"
+
+> Example
+curl 
+  -X 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
+  -d '{"language":"ori", "version":"ULB"}' 
+  "https://api.autographamt.bridgeconn.com/v1/revision"
+
+> Response (List of versions)
+["1"]
+```
+## Download Tokens
+There are two different ways a user can download tokens. A user can download the entire set of tokens for a specific set book(s) or the tokens for a set of book(s) excluding the tokens already included in a previous set.
+
+##  - Tokens Complete Set
+If the complete set of tokens are to be downloaded, a user can send the list of book(s) along with the language name, version and revision to the  `/bookwiseautotokens`. Server in response will send the complete set of tokens for the books specified, if they are available on the server. In case if the books are not present, server will respond with one of the following messages.
+
+  - If Source is not found `{"success":false, "message":"Source is not available. Upload source."}`
+
+  - If no books are selected `{"success":false, "message":"Select any books from include books"}`
+
+  - If no books are selected to be include list, but some books are selected in the exclude list `{"success":false, "message":"Select any books from include books"}`.
+
+```shell
+> CURL
+
+curl 
+  -X POST
+  -H "Authorization:bearer <access token>" 
+  -d '{"sourcelang":"sourcelang", "<version>":"<version>", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"<targetlang>"}' "https://api.mt2414.in/v1/getbookwiseautotokens"
+
+> Example
+curl
+  -X POST
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>"
+  -d '{"sourcelang":"ori", "version":"GL-ORYA-NT", "revision":"1", "books":["PHM", "2JN"], "nbooks": ["3JN"], "targetlang":"hin"}'
+  "https://api.mt2414.in/v1/getbookwiseautotokens"
+
+> Response (Tokens of the selected books as an Excel Sheet)
+
+```
+
+##  - Excluded Set
+The exclude books option can come handy when a user wanted to split the translation job between multiple tranlsators. The tokens from the books listed in the `nbooks` list will be removed after creating the tokens for the `books` selected.
+
+```shell
+> CURL
+
+curl 
+  -X POST
+  -H "Authorization:bearer <access token>" 
+  -d '{"sourcelang":"sourcelang", "<version>":"<version>", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"<targetlang>"}' "https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"
+
+> Example
+curl
+  -X POST
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>"
+  -d '{"sourcelang":"ori", "version":"GL-ORYA-NT", "revision":"1", "books":["PHM", "2JN"], "nbooks": ["3JN"], "targetlang":"hin"}'
+  "https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"
+
+> Response 
+Tokens of the selected books as an Excel Sheet
+```
+<aside class="notice">
+Supply the books to be included in the token generation as a value of *books* and the books to be excluded in the *nbooks*.
+</aside>
 # Token Words
 
 ## Get Token Words
