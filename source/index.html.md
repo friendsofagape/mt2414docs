@@ -151,7 +151,7 @@ curl
 The content submitted must be in valid usfm format. At a minimum the file should contain \id followed by a valid 3 letter Book id. Each book must be a separate file.
 </aside>
 
-# Language information
+# Source text information
 The following APIs can be called to access the information of source langauges, version and texts available on the server.
 
 ## Get source language list
@@ -178,14 +178,26 @@ To get the list of books and it's revision number of the a given version of a so
 
 If the server couldn't find the given combination it will send ```{"success":false, "message":"No books available"}``` as the response.
 
+
 ```shell
+### CURL
+
 curl
   -X POST
   -H "Authorization:bearer <access token>"
   -d '{"language":"<language_id>", "version":"<version_name>"}'
   "https://api.autographamt.bridgeconn.com/v1/get_books"
-``` 
 
+### Example
+curl 
+  -X POST 
+  -H "Authorization:bearer YOUR ACCESS KEY" 
+  -d '{"language":"ori", "version":"GL-ORYA-NT"}' 
+  "https://api.mt2414.in/v1/get_books"
+
+### Response
+[["MRK", "1"], ["GAL", "1"], ["MAT", "1"], ["ROM", "1"], ["JHN", "1"], ["LUK", "1"], ["ACT", "1"], ["EPH", "1"], ["PHP", "1"], ["COL", "1"], ["TIT", "1"], ["PHM", "1"], ["HEB", "1"], ["JAS", "1"], ["REV", "1"], ["JUD", "1"], ["1CO", "1"], ["2CO", "1"], ["1TH", "1"], ["2TH", "1"], ["1TI", "1"], ["2TI", "1"], ["1PE", "1"], ["2PE", "1"], ["1JN", "1"], ["2JN", "1"], ["3JN", "1"]]
+``` 
 # Token Words
 
 ## Get Token Words
