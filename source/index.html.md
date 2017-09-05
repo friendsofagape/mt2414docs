@@ -155,32 +155,55 @@ The content submitted must be in valid usfm format. At a minimum the file should
 The following APIs can be called to access the information of source langauges, version and texts available on the server.
 
 ## Get source language list
-To get the list of available source langauges on the server, a user can call the api /language. In response, the server will return the list of language ISO codes available on the server.
+To get the list of available source langauges on the server, a user can call the api `/language`. In response, the server will return the list of language ISO codes available on the server.
 
+If the server couldn't find any languages, the response will be `{"success":false, "message":"No Languages"}`
 ```shell
+
+> CURL
 curl
   -X POST
   -H "Authorization:bearer <access token>"
   "https://api.autographamt.bridgeconn.com/v1/language"
+
+> Example
+curl
+  -X POST
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
+  "https://api.autographamt.bridgeconn.com/v1/language"
+
+> Repsonse (list of 3 letter ISO codes of the lanagues available)
+["guj", "tel", "khn", "ori", "mar", "hin"]
 ``` 
 
 ## Get source text list
-To get the list of available source languages *with the versions name*, a user can call the api /get_languages. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.
+To get the list of available source languages *with the versions name*, a user can call the api `/get_languages`. In response, the server will return the list of language iso codes and the corresponding version names paired as a list.
 
 ```shell
+
+> CURL
 curl
   -X POST
   -H "Authorization:bearer <access token>"
   "https://api.autographamt.bridgeconn.com/v1/get_languages"
+
+> Examples
+curl 
+  -X POST 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
+  "https://api.autographamt.brideconn.com/v1/get_languages"
+
+> Response (3 letter ISO code of the language + version name)
+[["ori", "GL-ORYA-NT"], ["mar", "GL-MAR-NT"], ["guj", "GL-GUJ-NT"], ["ori", "OBS"], ["tel", "GL-TEL-NT"], ["hin", "GL-HIN-NT"], ["khn", "OA-KHN-NT"], ["hin", "GL-HIN-PSA-PRO"]]
 ``` 
 ## Get the book list
-To get the list of books and it's revision number of the a given version of a source language, a user can call the /get_books api. In response, the server will return a list of all the books as 3 letter book id and revision number paired as a list.
+To get the list of books and it's revision number of the a given version of a source language, a user can call the `/get_books` api. In response, the server will return a list of all the books as 3 letter book id and revision number paired as a list.
 
 If the server couldn't find the given combination it will send ```{"success":false, "message":"No books available"}``` as the response.
 
 
 ```shell
-### CURL
+> CURL
 
 curl
   -X POST
@@ -188,14 +211,14 @@ curl
   -d '{"language":"<language_id>", "version":"<version_name>"}'
   "https://api.autographamt.bridgeconn.com/v1/get_books"
 
-### Example
+> Example
 curl 
   -X POST 
-  -H "Authorization:bearer YOUR ACCESS KEY" 
+  -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
   -d '{"language":"ori", "version":"GL-ORYA-NT"}' 
-  "https://api.mt2414.in/v1/get_books"
+  "https://api.autographamt.bridgeconn.com/v1/get_books"
 
-### Response
+> Response (3 letter ISO code + revision number)
 [["MRK", "1"], ["GAL", "1"], ["MAT", "1"], ["ROM", "1"], ["JHN", "1"], ["LUK", "1"], ["ACT", "1"], ["EPH", "1"], ["PHP", "1"], ["COL", "1"], ["TIT", "1"], ["PHM", "1"], ["HEB", "1"], ["JAS", "1"], ["REV", "1"], ["JUD", "1"], ["1CO", "1"], ["2CO", "1"], ["1TH", "1"], ["2TH", "1"], ["1TI", "1"], ["2TI", "1"], ["1PE", "1"], ["2PE", "1"], ["1JN", "1"], ["2JN", "1"], ["3JN", "1"]]
 ``` 
 # Token Words
