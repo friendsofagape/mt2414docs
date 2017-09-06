@@ -31,7 +31,7 @@ Currently anyone with a valid email address can register and access the resource
 curl -X POST 
   -d "username=<email_id>" 
   -d "password=<password>" 
-  https://api.autographamt.bridgeconn.com/v1/registration
+  "https://api.autographamt.bridgeconn.com/v1/registration"
 
 > Server will send a verification email to the email_id provided by the user, if the given email_id is not used for registering any other user accounts.
 
