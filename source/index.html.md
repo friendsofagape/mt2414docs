@@ -369,11 +369,11 @@ curl
 '{"English": "en", "Malayalam": "ml", "Hindi": "hi", ...}'
 ```
 
-## Update language list
+### Update language list
 AutographaMT lists all the Indian languages listed in [`translationDatabase`]("http://td.unfoldingword.org/exports/langnames.json") which is maintained by the unfoldingword.org team. To update the list on the AutographaMT server, user can call the `/updatelanguagelist` api.
 
 ```shell
-> CURL
+> CURL to Update the target language list
 curl 
   -H "Authorization:bearer <access token>" 
   "https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"
@@ -430,117 +430,63 @@ If the file upload completed succesfully | {"success":true, "message":"Token tra
 The `curl` command for this api is not tested using curl. The file submission was tested using postman.
 </aside>
 
-# Token Words
-
-## Get Token Words
-
-```shell
-curl "https://api.mt2414.in/v1/tokenwords/<source-lang>"
-  -H "Authorization: secretkey"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "tokenwords" : [
-    {
-      "msgid": "word1",
-      "msgstr": ""
-    },
-    {
-      "msgid": "word2",
-      "msgstr": ""
-    }]
-}
-```
-
-This endpoint retrieves all token words.
-
-### HTTP Request
-
-`GET https://api.mt2414.in/v1/tokenwords/<source-lang>`
-
 # Translations
+The translation APIs will help user see the progress of the translation and also to download the draft translation. The translation APIs requires the following information.
+[source language](./#get-source-language-list), [version](./#version), [revision](./#revision) and the [target language](./#list-of-target-languages)
 
-## Create new translation
+## Book
+The `/book` api will give the available books for the selected pair of languages.
 
 ```shell
-curl "https://api.mt2414.in/v1/translations"
+
+> CURL
+curl 
+  -X POST 
+  -H "Authorization: bearer <api token>" 
+  -d '{"language":"<IETF_language_code>", "version":"<version_name>", "revision":"<revision_number>", "targetlang":"<IETF_langauge_code_of_target_language>"}' 
+  "https://api.autographamt.bridgeconn.com/v1/book"
+
+> Example
+curl 
+  -X POST 
+  -H "Authorization: bearer <YOUR API TOKEN>" 
+  -d '{"language":"guj", "version":"GL-GUJ-NT", "revision":"1", "targetlang":"ori"}' 
+  "https://api.autographamt.bridgeconn.com/v1/book"
+
+> Response
+["REV", "JUD", "3JN", "2JN", "1JN", "2PE", "1PE", "JAS", "HEB", "PHM", "TIT", "2TI", "1TI", "2TH", "1TH", "COL", "GAL", "2CO", "ROM", "EPH", "PHP", "1CO", "ACT", "JHN", "LUK", "MRK", "MAT"]
+```
+## Download Draft
+To download the draft translation.
+
+```shell
+
+> CURL
+curl
   -X POST
   -H "Authorization: secretkey"
-  -d '{
-  "tokenwords" : [
-    {
-      "msgid": "word1",
-      "msgstr": "translation1"
-    },
-    {
-      "msgid": "word2",
-      "msgstr": "translation2"
-    }]
-}'
+  -d '{"sourcelang": "<IETF_code_of_source_language>", "version": "version_name", "revision": "<Revision_Number>" , "targetlang": "<IETF_code_of_target_language>", "books": "[3_letter_codes_of_books_as_list]"}'
+  "https://api.autographamt.bridgeconn.com"
+
+>Example
+curl 
+  -X POST 
+  -H "Authorization: bearer <YOUR ACCESS TOKEN>" 
+  -d '{"sourcelang":"guj", "version":"GL-GUJ-NT", "revision":"1", "targetlang":"ori", "books":["JUD", "2JN"]}' "https://api.mt2414.in/v1/translations"
+
+> Response
+If success, the server will return the requested books in a JSON structure, with book id as Key and the draft in usfm format as value. 
+
+{"2JN": "2JN draft in USFM" 
+ "JUD": "JUD Draft in USFM"}
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{
-"GEN": "USFM text for Genesis",
-"EXO": "USFM text for Exodus"
-}
-```
+Condition | Response 
+-----------------|----------
+No books selected for translation | {"success":false, "message":"Select the books to be Translated."}
+The source doesn't exist on the server | '{"success":false, "message":"Source is not available. Upload it"}'
+If some books requested are not available on server | {"success":false, "message":"' + ", " <unavailable book ids> + ' not available. Upload it to generate draft"}'
 
 ### HTTP Request
 
 `POST https://api.mt2414.in/v1/translations`
-
-# Corrections
-
-## Update corrections
-
-```shell
-curl "https://api.mt2414.in/v1/corrections"
-  -X POST
-  -H "Authorization: secretkey"
-  -d '{
-    "book.chapter.verse" : "New verse text",
-    "book.chapter.verse" : "New verse text",
-    "book.chapter.verse" : "New verse text",
-}'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-"GEN": "USFM text for Genesis",
-"EXO": "USFM text for Exodus"
-}
-```
-
-### HTTP Request
-
-`POST https://api.mt2414.in/v1/corrections`
-
-# Suggestions
-
-## Get suggestions
-
-```shell
-curl "https://api.mt2414.in/v1/suggestions/<book-name>"
-  -H "Authorization: secretkey"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-"GEN": "USFM text for Genesis",
-"EXO": "USFM text for Exodus"
-}
-```
-
-### HTTP Request
-
-`GET https://api.mt2414.in/v1/suggestions/<book-name>`
