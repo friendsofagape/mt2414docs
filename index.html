@@ -309,18 +309,7 @@
                     <a href="#list-of-target-languages" class="toc-h2 toc-link" data-title="Submit Translated Tokens">List of target languages</a>
                   </li>
                   <li>
-                    <a href="#update-language-list" class="toc-h2 toc-link" data-title="Submit Translated Tokens">Update language list</a>
-                  </li>
-                  <li>
                     <a href="#upload-translated-tokens" class="toc-h2 toc-link" data-title="Submit Translated Tokens">Upload Translated Tokens</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#token-words" class="toc-h1 toc-link" data-title="Token Words">Token Words</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-token-words" class="toc-h2 toc-link" data-title="Token Words">Get Token Words</a>
                   </li>
               </ul>
           </li>
@@ -328,23 +317,10 @@
             <a href="#translations" class="toc-h1 toc-link" data-title="Translations">Translations</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-new-translation" class="toc-h2 toc-link" data-title="Translations">Create new translation</a>
+                    <a href="#book" class="toc-h2 toc-link" data-title="Translations">Book</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#corrections" class="toc-h1 toc-link" data-title="Corrections">Corrections</a>
-              <ul class="toc-list-h2">
                   <li>
-                    <a href="#update-corrections" class="toc-h2 toc-link" data-title="Corrections">Update corrections</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#suggestions" class="toc-h1 toc-link" data-title="Suggestions">Suggestions</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-suggestions" class="toc-h2 toc-link" data-title="Suggestions">Get suggestions</a>
+                    <a href="#download-draft" class="toc-h2 toc-link" data-title="Translations">Download Draft</a>
                   </li>
               </ul>
           </li>
@@ -655,9 +631,9 @@ curl
 
 <span class="gp">&gt; </span>Response 
 <span class="s1">'{"English": "en", "Malayalam": "ml", "Hindi": "hi", ...}'</span>
-</code></pre><h2 id='update-language-list'>Update language list</h2>
+</code></pre><h3 id='update-language-list'>Update language list</h3>
 <p>AutographaMT lists all the Indian languages listed in <a href="&quot;http://td.unfoldingword.org/exports/langnames.json&quot;"><code>translationDatabase</code></a> which is maintained by the unfoldingword.org team. To update the list on the AutographaMT server, user can call the <code>/updatelanguagelist</code> api.</p>
-<pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
+<pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL to Update the target language list
 curl 
   -H <span class="s2">"Authorization:bearer &lt;access token&gt;"</span> 
   <span class="s2">"https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"</span>
@@ -728,83 +704,73 @@ The server will respond with the message <span class="sb">`</span>server message
 <aside class="warning">
 The `curl` command for this api is not tested using curl. The file submission was tested using postman.
 </aside>
-<h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
+<h1 id='translations'>Translations</h1>
+<p>The translation APIs will help user see the progress of the translation and also to download the draft translation. The translation APIs requires the following information.
+<a href="./#get-source-language-list">source language</a>, <a href="./#version">version</a>, <a href="./#revision">revision</a> and the <a href="./#list-of-target-languages">target language</a></p>
+<h2 id='book'>Book</h2>
+<p>The <code>/book</code> api will give the available books for the selected pair of languages.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization: bearer &lt;api token&gt;"</span> 
+  -d <span class="s1">'{"language":"&lt;IETF_language_code&gt;", "version":"&lt;version_name&gt;", "revision":"&lt;revision_number&gt;", "targetlang":"&lt;IETF_langauge_code_of_target_language&gt;"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/book"</span>
+
+<span class="gp">&gt; </span>Example
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization: bearer &lt;YOUR API TOKEN&gt;"</span> 
+  -d <span class="s1">'{"language":"guj", "version":"GL-GUJ-NT", "revision":"1", "targetlang":"ori"}'</span> 
+  <span class="s2">"https://api.autographamt.bridgeconn.com/v1/book"</span>
+
+<span class="gp">&gt; </span>Response
+<span class="o">[</span><span class="s2">"REV"</span>, <span class="s2">"JUD"</span>, <span class="s2">"3JN"</span>, <span class="s2">"2JN"</span>, <span class="s2">"1JN"</span>, <span class="s2">"2PE"</span>, <span class="s2">"1PE"</span>, <span class="s2">"JAS"</span>, <span class="s2">"HEB"</span>, <span class="s2">"PHM"</span>, <span class="s2">"TIT"</span>, <span class="s2">"2TI"</span>, <span class="s2">"1TI"</span>, <span class="s2">"2TH"</span>, <span class="s2">"1TH"</span>, <span class="s2">"COL"</span>, <span class="s2">"GAL"</span>, <span class="s2">"2CO"</span>, <span class="s2">"ROM"</span>, <span class="s2">"EPH"</span>, <span class="s2">"PHP"</span>, <span class="s2">"1CO"</span>, <span class="s2">"ACT"</span>, <span class="s2">"JHN"</span>, <span class="s2">"LUK"</span>, <span class="s2">"MRK"</span>, <span class="s2">"MAT"</span><span class="o">]</span>
+</code></pre><h2 id='download-draft'>Download Draft</h2>
+<p>To download the draft translation.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl
+  -X POST
   -H <span class="s2">"Authorization: secretkey"</span>
+  -d <span class="s1">'{"sourcelang": "&lt;IETF_code_of_source_language&gt;", "version": "version_name", "revision": "&lt;Revision_Number&gt;" , "targetlang": "&lt;IETF_code_of_target_language&gt;", "books": "[3_letter_codes_of_books_as_list]"}'</span>
+  <span class="s2">"https://api.autographamt.bridgeconn.com"</span>
+
+&gt;Example
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization: bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  -d <span class="s1">'{"sourcelang":"guj", "version":"GL-GUJ-NT", "revision":"1", "targetlang":"ori", "books":["JUD", "2JN"]}'</span> <span class="s2">"https://api.mt2414.in/v1/translations"</span>
+
+<span class="gp">&gt; </span>Response
+If success, the server will <span class="k">return </span>the requested books <span class="k">in </span>a JSON structure, with book id as Key and the draft <span class="k">in </span>usfm format as value. 
+
+<span class="o">{</span><span class="s2">"2JN"</span>: <span class="s2">"2JN draft in USFM"</span> 
+ <span class="s2">"JUD"</span>: <span class="s2">"JUD Draft in USFM"</span><span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"tokenwords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"msgid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"msgstr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all token words.</p>
+<table><thead>
+<tr>
+<th>Condition</th>
+<th>Response</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No books selected for translation</td>
+<td>{&quot;success&quot;:false, &quot;message&quot;:&quot;Select the books to be Translated.&quot;}</td>
+</tr>
+<tr>
+<td>The source doesn&#39;t exist on the server</td>
+<td>&#39;{&quot;success&quot;:false, &quot;message&quot;:&quot;Source is not available. Upload it&quot;}&#39;</td>
+</tr>
+<tr>
+<td>If some books requested are not available on server</td>
+<td>{&quot;success&quot;:false, &quot;message&quot;:&quot;&#39; + &quot;, &quot; <unavailable book ids> + &#39; not available. Upload it to generate draft&quot;}&#39;</td>
+</tr>
+</tbody></table>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;</code></p>
-<h1 id='translations'>Translations</h1><h2 id='create-new-translation'>Create new translation</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/translations"</span>
-  -X POST
-  -H <span class="s2">"Authorization: secretkey"</span>
-  -d <span class="s1">'{
-  "tokenwords" : [
-    {
-      "msgid": "word1",
-      "msgstr": "translation1"
-    },
-    {
-      "msgid": "word2",
-      "msgstr": "translation2"
-    }]
-}'</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://api.mt2414.in/v1/translations</code></p>
-<h1 id='corrections'>Corrections</h1><h2 id='update-corrections'>Update corrections</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/corrections"</span>
-  -X POST
-  -H <span class="s2">"Authorization: secretkey"</span>
-  -d <span class="s1">'{
-    "book.chapter.verse" : "New verse text",
-    "book.chapter.verse" : "New verse text",
-    "book.chapter.verse" : "New verse text",
-}'</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST https://api.mt2414.in/v1/corrections</code></p>
-<h1 id='suggestions'>Suggestions</h1><h2 id='get-suggestions'>Get suggestions</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;"</span>
-  -H <span class="s2">"Authorization: secretkey"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-</span><span class="s2">"GEN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Genesis"</span><span class="p">,</span><span class="w">
-</span><span class="s2">"EXO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USFM text for Exodus"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET https://api.mt2414.in/v1/suggestions/&lt;book-name&gt;</code></p>
 <h1 id='errors'>Errors</h1>
-<p>The MT2414 API uses the following error codes:</p>
+<p>The AutographaMT API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -814,7 +780,7 @@ The `curl` command for this api is not tested using curl. The file submission wa
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request sucks.</td>
+<td>Bad Request -- Your request has a problem.</td>
 </tr>
 <tr>
 <td>401</td>
@@ -822,15 +788,15 @@ The `curl` command for this api is not tested using curl. The file submission wa
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The service requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified service could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a service with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -838,7 +804,7 @@ The `curl` command for this api is not tested using curl. The file submission wa
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>Gone -- The service requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>418</td>
@@ -846,7 +812,7 @@ The `curl` command for this api is not tested using curl. The file submission wa
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- You&#39;re requesting too many services! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
