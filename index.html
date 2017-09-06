@@ -311,6 +311,9 @@
                   <li>
                     <a href="#update-language-list" class="toc-h2 toc-link" data-title="Submit Translated Tokens">Update language list</a>
                   </li>
+                  <li>
+                    <a href="#upload-translated-tokens" class="toc-h2 toc-link" data-title="Submit Translated Tokens">Upload Translated Tokens</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -635,9 +638,9 @@ Supply the books to be included in the token generation as a value of "books" an
 If you use the exclude tokens, the translation can't be complete until the user uploads the first sets of tokens generated.
 </aside>
 <h1 id='submit-translated-tokens'>Submit Translated Tokens</h1>
-<p>To submit the translated tokens back to the server, <code>/uploadtokentransltion</code> api can be called. The translated tokens must be in either <code>xls</code> or in <code>xlsx</code> (preferred) format.</p>
+<p>Once the translation of the tokens is completed, user can upload it back to the server. The translated tokens must be in either <code>xls</code> or in <code>xlsx</code> (preferred) format.</p>
 
-<p>In order to upload the translated tokens, user must specify the target language. </p>
+<p>In order to upload the translated tokens, user must specify the <a href="./#get-source-language-list">source language</a>, <a href="./#version">version</a> and <a href="./#revision">revision</a> number along with the target language. </p>
 <h2 id='list-of-target-languages'>List of target languages</h2>
 <p>To get the list of currently available target languages, use <code>/languagelist</code> api. </p>
 <pre class="highlight shell tab-shell"><code><span class="gp">&gt; </span>CURL
@@ -666,7 +669,66 @@ curl
 
 <span class="gp">&gt; </span>Response 
 <span class="o">{</span><span class="s2">"success"</span>:true, <span class="s2">"message"</span>:<span class="s2">"Language List updated."</span><span class="o">}</span>
-</code></pre><h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
+</code></pre><h2 id='upload-translated-tokens'>Upload Translated Tokens</h2>
+<p>To submit the translated tokens back to the server, <code>/uploadtokentranslation</code> api can be called. This API accepts the translated tokens as a spreadsheet file along with other metadata such as the source language, version, revision and the target language.</p>
+<pre class="highlight shell tab-shell"><code>
+<span class="gp">&gt; </span>CURL
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization: bearer &lt;your access token&gt;"</span> 
+  -F <span class="s2">"language=&lt;3_letter_iso_language_code&gt;"</span> 
+  -F <span class="s2">"version=&lt;version_name&gt;"</span> 
+  -F <span class="s2">"revision=&lt;rev_number"</span> 
+  -F <span class="s2">"targetlang=&lt;3_letter_iso_language_code&gt;"</span> 
+  -F <span class="s2">"tokenwords=@path/to/file"</span> 
+  <span class="s2">"https://api.mt2414.in/v1/uploadtokentranslation"</span>
+
+&gt;Example
+curl 
+  -X POST 
+  -H <span class="s2">"Authorization: bearer &lt;YOUR ACCESS TOKEN&gt;"</span> 
+  -F <span class="s2">"language=guj"</span> 
+  -F <span class="s2">"version=GL-GUJ-NT"</span> 
+  -F <span class="s2">"revision=1"</span> 
+  -F <span class="s2">"targetlang=ori"</span> 
+  -F <span class="s2">"tokenwords=@./gj.xlsx"</span> 
+  <span class="s2">"https://api.mt2414.in/v1/uploadtokentranslation"</span>
+
+<span class="gp">&gt; </span>Response
+The server will respond with the message <span class="sb">`</span>server message<span class="sb">`</span> <span class="k">if </span>the file is uploaded sucessfully
+</code></pre>
+<table><thead>
+<tr>
+<th>Condition</th>
+<th>Response</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>The source doesn&#39;t exist on the server</td>
+<td>&#39;{&quot;success&quot;:false, &quot;message&quot;:&quot;Unable to locate the language, version and revision number specified&quot;}&#39;</td>
+</tr>
+<tr>
+<td>Invalid file format</td>
+<td>{&quot;success&quot;:false, &quot;message&quot;:&quot;Invalid file format. Upload correct format of xls/xlsx files.&quot;}</td>
+</tr>
+<tr>
+<td>No new translated tokens</td>
+<td>{&quot;success&quot;:false, &quot;message&quot;:&quot;No Changes. Existing token is already up-to-date.&quot;}</td>
+</tr>
+<tr>
+<td>If tokens are not translated</td>
+<td>{&quot;success&quot;:false, &quot;message&quot;:&quot;Tokens have no translation&quot;}</td>
+</tr>
+<tr>
+<td>If the file upload completed succesfully</td>
+<td>{&quot;success&quot;:true, &quot;message&quot;:&quot;Token translation have been uploaded successfully&quot;}</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+The `curl` command for this api is not tested using curl. The file submission was tested using postman.
+</aside>
+<h1 id='token-words'>Token Words</h1><h2 id='get-token-words'>Get Token Words</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.mt2414.in/v1/tokenwords/&lt;source-lang&gt;"</span>
   -H <span class="s2">"Authorization: secretkey"</span>
 </code></pre>
 <blockquote>
