@@ -347,9 +347,9 @@ If you use the exclude tokens, the translation can't be complete until the user 
 </aside>
 
 # Submit Translated Tokens
-To submit the translated tokens back to the server, `/uploadtokentransltion` api can be called. The translated tokens must be in either `xls` or in `xlsx` (preferred) format.
+Once the translation of the tokens is completed, user can upload it back to the server. The translated tokens must be in either `xls` or in `xlsx` (preferred) format.
 
-In order to upload the translated tokens, user must specify the target language. 
+In order to upload the translated tokens, user must specify the [source language](./#get-source-language-list), [version](./#version) and [revision](./#revision) number along with the target language. 
 
 ## List of target languages
 To get the list of currently available target languages, use `/languagelist` api. 
@@ -386,6 +386,49 @@ curl
 > Response 
 {"success":true, "message":"Language List updated."}
 ```
+## Upload Translated Tokens
+To submit the translated tokens back to the server, `/uploadtokentranslation` api can be called. This API accepts the translated tokens as a spreadsheet file along with other metadata such as the source language, version, revision and the target language.
+
+```shell
+
+> CURL
+curl 
+  -X POST 
+  -H "Authorization: bearer <your access token>" 
+  -F "language=<3_letter_iso_language_code>" 
+  -F "version=<version_name>" 
+  -F "revision=<rev_number" 
+  -F "targetlang=<3_letter_iso_language_code>" 
+  -F "tokenwords=@path/to/file" 
+  "https://api.mt2414.in/v1/uploadtokentranslation"
+
+>Example
+curl 
+  -X POST 
+  -H "Authorization: bearer <YOUR ACCESS TOKEN>" 
+  -F "language=guj" 
+  -F "version=GL-GUJ-NT" 
+  -F "revision=1" 
+  -F "targetlang=ori" 
+  -F "tokenwords=@./gj.xlsx" 
+  "https://api.mt2414.in/v1/uploadtokentranslation"
+
+> Response
+The server will respond with the message `server message` if the file is uploaded sucessfully
+```
+
+Condition | Response 
+-----------------|----------
+The source doesn't exist on the server | '{"success":false, "message":"Unable to locate the language, version and revision number specified"}'
+Invalid file format | {"success":false, "message":"Invalid file format. Upload correct format of xls/xlsx files."}
+No new translated tokens | {"success":false, "message":"No Changes. Existing token is already up-to-date."}
+If tokens are not translated | {"success":false, "message":"Tokens have no translation"}
+If the file upload completed succesfully | {"success":true, "message":"Token translation have been uploaded successfully"}
+
+
+<aside class="warning">
+The `curl` command for this api is not tested using curl. The file submission was tested using postman.
+</aside>
 
 # Token Words
 
