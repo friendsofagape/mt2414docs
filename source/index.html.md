@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href="https://autographamt.bridgeconn.com">Sign Up for a Developer Key</a>
+  - <a href="https://autographamt.com">Sign Up for a Developer Key</a>
   - <a href="https://github.com/lord/slate">Documentation Powered by Slate</a>
 
 includes:
@@ -18,7 +18,7 @@ search: true
 
 Welcome to the AutographaMT API Documentation! You can use our API to access AutographaMT API endpoints to accelerate Bible translations. The AutographaMT APIs are accessed through a AutographaMT client.
 
-The documentation on how to use the AutographaMT client application is provided on [it's website](https://autographamt.bridgeconn.com). 
+The documentation on how to use the AutographaMT client application is provided on [it's website](https://autographamt.com). 
 
 # New user registration
 Currently anyone with a valid email address can register and access the resources on the AutographaMT server.
@@ -31,7 +31,7 @@ Currently anyone with a valid email address can register and access the resource
 curl -X POST 
   -d "username=<email_id>" 
   -d "password=<password>" 
-  "https://api.autographamt.bridgeconn.com/v1/registration"
+  "https://api.autographamt.com/v1/registration"
 
 > Server will send a verification email to the email_id provided by the user, if the given email_id is not used for registering any other user accounts.
 
@@ -41,24 +41,27 @@ curl -X POST
 When the user clicks on the verification link sent to the email id, the verification request is submitted to the /verification endpoint.
 
 ```shell
-curl "https://api.autographamt.bridgeconn.com/v1/verification/<verification_code>"
+curl "https://api.autographamt.com/v1/verification/<verification_code>"
   -X GET
 
 > After the succesfful verification, the user will be directed to the homepage of the client app.
 ```
-# Authentication
+# Authentication Overview
+Authentication is the process of determining a client's identity. Authorization refers to the process of determining what permissions an authenticated user has on the system. In other words, the authentication process will identify a user where in authorization determines what he/she can do on the system.
+
+## Authentication
 
 > To authorize, use this code:
 
 ```shell
-curl "https://api.autographamt.bridgeconn.com/v1/auth"
+curl "https://api.autographamt.com/v1/auth"
   -X POST 
   -d "username=<email_id>" 
   -d "password=<password>"
 
 > This will return the `secretkey` to access the API server.
 ```
-AutographaMT uses API keys to allow access to the APIs. You can register a new AutographaMT API key at our [site](https://augtographamt.bridgeconn.com). To authorize a user on the API side, we use JWT tokens. These have to be added to all requests using the following header.
+AutographaMT uses API keys to authenticate and authorize clients to provide access to the APIs. You can register a new AutographaMT API key at our [site](https://augtographamt.bridgeconn.com). To authorize a user on the API side, we use JWT tokens. These have to be added to all requests using the following header.
 
 `Authorization: Bearer <jwt>`
 
@@ -85,7 +88,7 @@ it will return `{"success":false, "message":"Email has not yet been registered"}
 > To send the request for a temporary password
 
 ```shell
-curl "https://api.autographamt.bridgeconn.com/v1/resetpassword"
+curl "https://api.autographamt.com/v1/resetpassword"
   -X POST 
   -d "email=<email>" 
 
@@ -102,7 +105,7 @@ If the temporary password doesn't match with the server's temporary password, it
 > To send the request for a temporary password
 
 ```shell
-curl "https://api.autographamt.bridgeconn.com/v1/forgotpassword"
+curl "https://api.autographamt.com/v1/forgotpassword"
   -X POST 
   -d "temp_password=<temp_password>" 
   -d "password=<new_password>"
@@ -110,6 +113,8 @@ curl "https://api.autographamt.bridgeconn.com/v1/forgotpassword"
 # Keys
 The /v1/keys will permit a client application to interact with the system without having to call the /auth all the time. 
 
+## Authorization
+There are 3 roles in AutographaMT. The top level role is `superadmin` whose role is assigned manually during the installation of the server. Every new user on the system is a `member`. A `superadmin` can optionally change the role of a user from `member` to `admin`. 
 ### TODO
 
 # Create Source Text
@@ -165,13 +170,13 @@ If the server couldn't find any languages, the response will be `{"success":fals
 curl
   -X POST
   -H "Authorization:bearer <access token>"
-  "https://api.autographamt.bridgeconn.com/v1/language"
+  "https://api.autographamt.com/v1/language"
 
 > Example
 curl
   -X POST
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
-  "https://api.autographamt.bridgeconn.com/v1/language"
+  "https://api.autographamt.com/v1/language"
 
 > Repsonse (list of 3 letter ISO codes of the lanagues available)
 ["guj", "tel", "khn", "ori", "mar", "hin"]
@@ -188,7 +193,7 @@ If the server couldn't find any text matching the language-version name, the res
 curl
   -X POST
   -H "Authorization:bearer <access token>"
-  "https://api.autographamt.bridgeconn.com/v1/get_languages"
+  "https://api.autographamt.com/v1/get_languages"
 
 > Examples
 curl 
@@ -212,14 +217,14 @@ curl
   -X POST
   -H "Authorization:bearer <access token>"
   -d '{"language":"<language_id>", "version":"<version_name>"}'
-  "https://api.autographamt.bridgeconn.com/v1/get_books"
+  "https://api.autographamt.com/v1/get_books"
 
 > Example
 curl 
   -X POST 
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
   -d '{"language":"ori", "version":"GL-ORYA-NT"}' 
-  "https://api.autographamt.bridgeconn.com/v1/get_books"
+  "https://api.autographamt.com/v1/get_books"
 
 > Response (3 letter ISO code + revision number)
 [["MRK", "1"], ["GAL", "1"], ["MAT", "1"], ["ROM", "1"], ["JHN", "1"], ["LUK", "1"], ["ACT", "1"], ["EPH", "1"], ["PHP", "1"], ["COL", "1"], ["TIT", "1"], ["PHM", "1"], ["HEB", "1"], ["JAS", "1"], ["REV", "1"], ["JUD", "1"], ["1CO", "1"], ["2CO", "1"], ["1TH", "1"], ["2TH", "1"], ["1TI", "1"], ["2TI", "1"], ["1PE", "1"], ["2PE", "1"], ["1JN", "1"], ["2JN", "1"], ["3JN", "1"]]
@@ -247,14 +252,14 @@ curl
   -X 
   -H "Authorization:bearer <access token>" 
   -d '{"language":"<language>"}' 
-  "https://api.autographamt.bridgeconn.com/v1/version"
+  "https://api.autographamt.com/v1/version"
 
 > Example
 curl 
   -X 
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
   -d '{"language":"ori"}' 
-  "https://api.autographamt.bridgeconn.com/v1/version"
+  "https://api.autographamt.com/v1/version"
 
 > Response (List of versions)
 ["GL-ORYA-NT", "OBS"]
@@ -274,14 +279,14 @@ curl
   -X 
   -H "Authorization:bearer <access token>" 
   -d '{"language":"<language>", "version":"<version>"}' 
-  "https://api.autographamt.bridgeconn.com/v1/revision"
+  "https://api.autographamt.com/v1/revision"
 
 > Example
 curl 
   -X 
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
   -d '{"language":"ori", "version":"ULB"}' 
-  "https://api.autographamt.bridgeconn.com/v1/revision"
+  "https://api.autographamt.com/v1/revision"
 
 > Response (List of versions)
 ["1"]
@@ -326,14 +331,14 @@ The exclude books option can come handy when a user wanted to split the translat
 curl 
   -X POST
   -H "Authorization:bearer <access token>" 
-  -d '{"sourcelang":"sourcelang", "<version>":"<version>", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"<targetlang>"}' "https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"
+  -d '{"sourcelang":"sourcelang", "<version>":"<version>", "revision":"revision", "books":["book1", "book2"...], "nbooks":["book1", "book2"...], "targetlang":"<targetlang>"}' "https://api.autographamt.com/v1/getbookwiseautotokens"
 
 > Example
 curl
   -X POST
   -H "Authorization:bearer <YOUR ACCESS TOKEN>"
   -d '{"sourcelang":"ori", "version":"GL-ORYA-NT", "revision":"1", "books":["PHM", "2JN"], "nbooks": ["3JN"], "targetlang":"hin"}'
-  "https://api.autographamt.bridgeconn.com/v1/getbookwiseautotokens"
+  "https://api.autographamt.com/v1/getbookwiseautotokens"
 
 > Response 
 Tokens of the selected books as an Excel Sheet
@@ -358,12 +363,12 @@ To get the list of currently available target languages, use `/languagelist` api
 > CURL
 curl 
   -H "Authorization:bearer <access token>" 
-  "https://api.autographamt.bridgeconn.com/v1/languagelist"
+  "https://api.autographamt.com/v1/languagelist"
 
 > Example
 curl 
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
-  "https://api.autographamt.bridgeconn.com/v1/languagelist"
+  "https://api.autographamt.com/v1/languagelist"
 
 > Response 
 '{"English": "en", "Malayalam": "ml", "Hindi": "hi", ...}'
@@ -376,12 +381,12 @@ AutographaMT lists all the Indian languages listed in [`translationDatabase`]("h
 > CURL to Update the target language list
 curl 
   -H "Authorization:bearer <access token>" 
-  "https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"
+  "https://api.autographamt.com/v1/updatelanguagelist"
 
 > Example
 curl 
   -H "Authorization:bearer <YOUR ACCESS TOKEN>" 
-  "https://api.autographamt.bridgeconn.com/v1/updatelanguagelist"
+  "https://api.autographamt.com/v1/updatelanguagelist"
 
 > Response 
 {"success":true, "message":"Language List updated."}
@@ -430,6 +435,36 @@ If the file upload completed succesfully | {"success":true, "message":"Token tra
 The `curl` command for this api is not tested using curl. The file submission was tested using postman.
 </aside>
 
+## Update Tokens
+When a user submit a translated token set through `/uploadtokentranslation` api, the server ignores any words that already have a translation. This is to prevent accidental any accidental changes in the translation. However if there are some tokens that need to be updated, an `admin` user can use the `/updatetranslatedtokens` api to do so. 
+
+```shell
+> CURL
+
+curl 
+  -X POST 
+  -H "Authorization: bearer <access token>" 
+  -F "language=<IETF_language_code>" 
+  -F "version=<version_name>" 
+  -F "revision=1" 
+  -F "targetlang=ori" 
+  -F "tokenwords=@/home/benjamin/Desktop/gj.xlsx" 
+  "https://api.mt2414.in/v1/updatetokentranslation"
+
+> Example
+curl 
+  -X POST 
+  -H "Authorization: bearer <access token>" 
+  -F "language=guj" 
+  -F "version=GL-GUJ-NT" 
+  -F "revision=1" 
+  -F "targetlang=ori" 
+  -F "tokenwords=@/home/benjamin/Desktop/gj.xlsx" 
+  "https://api.mt2414.in/v1/updatetokentranslation"
+
+> Response
+If the update token completed succesfully, the server send the response `{"success":true, "message":"Token translation have been updated"}`
+```
 # Translations
 The translation APIs will help user see the progress of the translation and also to download the draft translation. The translation APIs requires the following information.
 [source language](./#get-source-language-list), [version](./#version), [revision](./#revision) and the [target language](./#list-of-target-languages)
@@ -444,14 +479,14 @@ curl
   -X POST 
   -H "Authorization: bearer <api token>" 
   -d '{"language":"<IETF_language_code>", "version":"<version_name>", "revision":"<revision_number>", "targetlang":"<IETF_langauge_code_of_target_language>"}' 
-  "https://api.autographamt.bridgeconn.com/v1/book"
+  "https://api.autographamt.com/v1/book"
 
 > Example
 curl 
   -X POST 
   -H "Authorization: bearer <YOUR API TOKEN>" 
   -d '{"language":"guj", "version":"GL-GUJ-NT", "revision":"1", "targetlang":"ori"}' 
-  "https://api.autographamt.bridgeconn.com/v1/book"
+  "https://api.autographamt.com/v1/book"
 
 > Response
 ["REV", "JUD", "3JN", "2JN", "1JN", "2PE", "1PE", "JAS", "HEB", "PHM", "TIT", "2TI", "1TI", "2TH", "1TH", "COL", "GAL", "2CO", "ROM", "EPH", "PHP", "1CO", "ACT", "JHN", "LUK", "MRK", "MAT"]
@@ -466,7 +501,7 @@ curl
   -X POST
   -H "Authorization: secretkey"
   -d '{"sourcelang": "<IETF_code_of_source_language>", "version": "version_name", "revision": "<Revision_Number>" , "targetlang": "<IETF_code_of_target_language>", "books": "[3_letter_codes_of_books_as_list]"}'
-  "https://api.autographamt.bridgeconn.com"
+  "https://api.autographamt.com"
 
 >Example
 curl 
